@@ -1,0 +1,20 @@
+class Solution:
+    def eraseOverlapIntervals(self, intervals):
+        if not intervals:
+            return 0
+
+        # 依照結束時間排序
+        intervals.sort(key=lambda x: x[1])
+
+        remove = 0
+        end = intervals[0][1]
+
+        for i in range(1, len(intervals)):
+            if intervals[i][0] < end:
+                # 有重疊，需要刪除
+                remove += 1
+            else:
+                # 沒有重疊，更新目前的結束時間
+                end = intervals[i][1]
+
+        return remove
